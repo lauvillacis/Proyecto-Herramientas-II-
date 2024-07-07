@@ -48,7 +48,7 @@ class Metricas(CargarDatos):
         exactitud = accuracy_score(valores_reales, valores_predichos)
         return exactitud
     
-    def punta_de_precision(self, valores_reales, valores_predichos, etiquetas):
+    def puntaje_de_precision(self, valores_reales, valores_predichos, etiquetas):
         '''
         Devuelve 
 
