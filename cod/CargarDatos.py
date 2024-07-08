@@ -9,8 +9,21 @@ import pandas as pd
 
 class CargarDatos():
     
-    def __init__(self, base):
-        self.__base = pd.DataFrame(base)
+    def __init__(self, base=None):
+        """
+        Parameters
+        ----------
+        base : pd.dataframe, 
+        
+        Returns
+        -------
+        None.
+        """
+        
+        if(base==None):
+            self.__base = pd.DataFrame()
+        else:
+            self.__base=base
         
     @property
     def base(self):

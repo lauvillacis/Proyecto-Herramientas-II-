@@ -31,14 +31,15 @@ from cod.CargarDatos import CargarDatos
 
 
 class Modelos(CargarDatos):
-    def __init__(self, base, covariables, variable_predecir, covariables_train, covariables_test, predecir_train, predecir_test):
+
+    def __init__(self, base):
         CargarDatos.__init__(self, base)
-        self.__covariables = covariables
-        self.__variable_predecir = variable_predecir
-        self.__covariables_train = covariables_train
-        self.__covariables_test = covariables_test
-        self.__predecir_train = predecir_train
-        self.__predecir_test = predecir_test
+        self.__covariables = pd.DataFrame()
+        self.__variable_predecir =  pd.DataFrame()
+        self.__covariables_train =  pd.DataFrame()
+        self.__covariables_test =  pd.DataFrame()
+        self.__predecir_train =  pd.DataFrame()
+        self.__predecir_test =  pd.DataFrame()
         
         
     def sets(self):
