@@ -51,11 +51,12 @@ class Modelos(CargarDatos):
         self.__covariables_test = covariables_test
         self.__predecir_train = predecir_train
         self.__predecir_test = predecir_test
+        print(covariables_train.shape)
         
     def naive_bayes(self, validacion_cruzada = False):
         naive_bayes = GaussianNB()
         if validacion_cruzada:
-            predicciones = cross_val_predict(naive_bayes, self.__covariables , self.__variable_predecir, cv=5)
+            predicciones = cross_val_predict(naive_bayes,self.__covariables , self.__variable_predecir, cv=5)
         else: 
             naive_bayes.fit(self.__covariables_train, self.__predecir_train)
             predicciones = naive_bayes.predict(self.__covariables_test)

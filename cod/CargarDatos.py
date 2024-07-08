@@ -10,7 +10,7 @@ import pandas as pd
 class CargarDatos():
     
     def __init__(self, base):
-        self.__base = base
+        self.__base = pd.DataFrame(base)
         
     @property
     def base(self):
