@@ -32,7 +32,7 @@ from cod.CargarDatos import CargarDatos
 
 class Modelos(CargarDatos):
 
-    def __init__(self, base):
+    def __init__(self, base=None):
         CargarDatos.__init__(self, base)
         self.__covariables = pd.DataFrame()
         self.__variable_predecir =  pd.DataFrame()
@@ -43,16 +43,10 @@ class Modelos(CargarDatos):
         
         
     def sets(self):
-        covariables = self.base.iloc[:, :-1] 
-        self.__covariables = covariables
-        predecir = self.base.iloc[:, -1]
-        self.__variable_predecir = predecir
-        covariables_train, covariables_test, predecir_train, predecir_test = train_test_split(covariables, predecir, test_size=0.3, random_state=10)
-        self.__covariables_train = covariables_train
-        self.__covariables_test = covariables_test
-        self.__predecir_train = predecir_train
-        self.__predecir_test = predecir_test
-        print(covariables_train.shape)
+        self.__covariables = self.base.iloc[:, :-1] 
+        self.__variable_predecir = self.base.iloc[:, -1]
+        self.__covariables_train, self.__covariables_test, self.__predecir_train, self.__predecir_test = train_test_split(self.__covariables, self.__variable_predecir, test_size=0.3, random_state=10)
+        
         
     def naive_bayes(self, validacion_cruzada = False):
         naive_bayes = GaussianNB()
@@ -128,6 +122,7 @@ class Modelos(CargarDatos):
             }
         resultados = pd.DataFrame(resultados)
         return resultados 
+    
         
         
         
