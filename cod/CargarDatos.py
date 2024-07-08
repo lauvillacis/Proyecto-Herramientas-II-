@@ -46,5 +46,15 @@ class CargarDatos():
         '''
         self.__base = nueva_base
         
+    def view(self):
+        if self.__base is not None:
+            datos = self.__base.info()
+            print(datos)
+            return datos
+        else:
+            print("El objeto 'base' es None")
+            return None
+        
+        
     def cargar_base(self, ruta):
         self.__base = pd.read_excel(ruta)
