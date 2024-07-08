@@ -48,78 +48,48 @@ class Modelos(CargarDatos):
         self.__covariables_train, self.__covariables_test, self.__predecir_train, self.__predecir_test = train_test_split(self.__covariables, self.__variable_predecir, test_size=0.3, random_state=10)
         
         
-    def naive_bayes(self, validacion_cruzada = False):
+    def naive_bayes(self):
         naive_bayes = GaussianNB()
-        if validacion_cruzada:
-            predicciones = cross_val_predict(naive_bayes, self.__covariables , self.__variable_predecir, cv=5)
-            resultados = {
-                'valor_real' : list(self.__variable_predecir),
-                'valor_predicho': list(predicciones)
-            }
-        else: 
-            naive_bayes.fit(self.__covariables_train, self.__predecir_train)
-            predicciones = naive_bayes.predict(self.__covariables_test)
-            resultados = {
-                'valor_real' : list(self.__predecir_test),
-                'valor_predicho': list(predicciones)
-            }
+        naive_bayes.fit(self.__covariables_train, self.__predecir_train)
+        predicciones = naive_bayes.predict(self.__covariables_test)
+        resultados = {
+            'valor_real' : list(self.__predecir_test),
+            'valor_predicho': list(predicciones)
+        }
         resultados = pd.DataFrame(resultados)
         return resultados  
     
-    def regresion_logistica(self, validacion_cruzada = False):
+    def regresion_logistica(self):
         regresion_log = LogisticRegression()
-        if validacion_cruzada:
-            predicciones = cross_val_predict(regresion_log, self.__covariables , self.__variable_predecir, cv=5)
-            resultados = {
-                'valor_real' : list(self.__variable_predecir),
-                'valor_predicho': list(predicciones)
-            }
-        else: 
-            regresion_log = LogisticRegression()
-            regresion_log.fit(self.__covariables_train, self.__predecir_train)
-            predicciones = regresion_log.predict(self.__covariables_test)    
-            resultados = {
-                'valor_real' : list(self.__predecir_test),
-                'valor_predicho': list(predicciones)
-            }
+        regresion_log = LogisticRegression()
+        regresion_log.fit(self.__covariables_train, self.__predecir_train)
+        predicciones = regresion_log.predict(self.__covariables_test)    
+        resultados = {
+            'valor_real' : list(self.__predecir_test),
+            'valor_predicho': list(predicciones)
+        }
         resultados = pd.DataFrame(resultados)
         return resultados 
     
     def k_vecinos_cercanos(self,k_vecinos, validacion_cruzada = False): #cambiar el nombre de la funcion y del modelo??
         k_vecinos_cercanos = KNeighborsClassifier(n_neighbors= k_vecinos) #Aquí se define el numeor de vecinos
-        if validacion_cruzada:
-            scaler = StandardScaler()
-            covariables_estandar = scaler.fit_transform(self.__covariables)
-            predicciones = cross_val_predict(k_vecinos_cercanos, covariables_estandar , self.__variable_predecir, cv=5)
-            resultados = {
-                'valor_real' : list(self.__variable_predecir),
-                'valor_predicho': list(predicciones)
-            }
-        else:
-            k_vecinos_cercanos.fit(self.__covariables_train, self.__predecir_train)
-            predicciones = k_vecinos_cercanos.predict(self.__covariables_test)
-            resultados = {
-                'valor_real' : list(self.__predecir_test),
-                'valor_predicho': list(predicciones)
-            }
+        k_vecinos_cercanos.fit(self.__covariables_train, self.__predecir_train)
+        predicciones = k_vecinos_cercanos.predict(self.__covariables_test)
+        resultados = {
+            'valor_real' : list(self.__predecir_test),
+            'valor_predicho': list(predicciones)
+        }
         resultados = pd.DataFrame(resultados)
         return resultados 
     
-    def arbol_de_decision(self, validacion_cruzada = False):
+    def arbol_de_decision(self):
         arbol = DecisionTreeClassifier()
-        if validacion_cruzada:
-            predicciones = cross_val_predict(arbol, self.__covariables , self.__variable_predecir, cv=5)
-            resultados = {
-                'valor_real' : list(self.__variable_predecir),
-                'valor_predicho': list(predicciones)
-            }
-        else: 
-            arbol.fit(self.__covariables_train, self.__predecir_train)
-            predicciones = arbol.predict(self.__covariables_test)  
-            resultados = {
-                'valor_real' : list(self.__predecir_test),
-                'valor_predicho': list(predicciones)
-            }
+        arbol.fit(self.__covariables_train, self.__predecir_train)
+        predicciones = arbol.predict(self.__covariables_test)  
+        resultados = {
+            'valor_real' : list(self.__predecir_test),
+            'valor_predicho': list(predicciones)
+        }
         resultados = pd.DataFrame(resultados)
         return resultados 
     
