@@ -53,7 +53,7 @@ class Metricas():
         exactitud = accuracy_score(valores_reales, valores_predichos)
         return exactitud
     
-    def puntaje_de_precision(self, valores_reales, valores_predichos, etiquetas):
+    def puntaje_de_precision(self, valores_reales, valores_predichos):
         '''
         Devuelve 
 
@@ -72,11 +72,11 @@ class Metricas():
             DESCRIPTION.
 
         '''
-        precision = precision_score(valores_reales, valores_predichos, etiquetas, average = None)
+        precision = precision_score(valores_reales, valores_predichos, average = None)
         return precision
     
     def reporte_de_clasificacion(self, valores_reales, valores_predichos, etiquetas):
-        reporte = classification_report(valores_reales, valores_predichos, etiquetas)
+        reporte = classification_report(valores_reales, valores_predichos, target_names = etiquetas)
         return reporte
         
        
