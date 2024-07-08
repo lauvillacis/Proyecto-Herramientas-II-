@@ -27,7 +27,7 @@ from sklearn import metrics
 import warnings
 warnings.filterwarnings("ignore")
 
-from Datos import CargarDatos
+from CargarDatos import CargarDatos
 
 
 class Modelos(CargarDatos):
@@ -55,7 +55,7 @@ class Modelos(CargarDatos):
     def naive_bayes(self, validacion_cruzada = False):
         naive_bayes = GaussianNB()
         if validacion_cruzada:
-            predicciones = cross_val_predict(navie_bayes, self.__covariables , self.__variable_predecir, cv=5)
+            predicciones = cross_val_predict(naive_bayes, self.__covariables , self.__variable_predecir, cv=5)
         else: 
             naive_bayes.fit(self.__covariables_train, self.__predecir_train)
             predicciones = naive_bayes.predict(self.__covariables_test)
@@ -88,7 +88,9 @@ class Modelos(CargarDatos):
     def k_vecinos_cercanos(self,k_vecinos, validacion_cruzada = False): #cambiar el nombre de la funcion y del modelo??
         k_vecinos_cercanos = KNeighborsClassifier(n_neighbors= k_vecinos) #Aquí se define el numeor de vecinos
         if validacion_cruzada:
-            predicciones = cross_val_predict(k_vecinos_cercanos, self.__covariables , self.__variable_predecir, cv=5)
+            scaler = StandardScaler()
+            covariables_estandar = scaler.fit_transform(self.__covariales)
+            predicciones = cross_val_predict(k_vecinos_cercanos, covariables_estandar , self.__variable_predecir, cv=5)
         else:
             k_vecinos_cercanos.fit(self.__covariables_train, self.__predecir_train)
             predicciones = k_vecinos_cercanos.predict(self.__covariables_test)
