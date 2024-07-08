@@ -20,17 +20,18 @@ import warnings
 warnings.filterwarnings("ignore")
 
 
-class Metricas(CargarDatos):
-    def __init__(self, base):
-        CargarDatos.__init__(self, base)
+class Metricas():
+    def __init__(self, valores_reales, valores_predichos):
+        self.__valores_reales = valores_reales
+        self.__valores_predichos = valores_predichos
         
-    def matriz_de_confusion(self, valores_reales, valores_predichos):
-        matriz_confusion = confusion_matrix(valores_reales, valores_predichos)
+    def matriz_de_confusion(self):
+        matriz_confusion = confusion_matrix(self.__valores_reales, self.__valores_predichos)
         return matriz_confusion
     
-    def puntaje_de_exactitud(self, valores_reales, valores_predichos):
+    def puntaje_de_exactitud(self):
         '''
-        Devuelve la medida  de la proporciooo2ón de predicciones correctas
+        Devuelve la medida  de la proporción de predicciones correctas
 
         Parameters
         ----------
@@ -45,10 +46,10 @@ class Metricas(CargarDatos):
             DESCRIPTION.
 
         '''
-        exactitud = accuracy_score(valores_reales, valores_predichos)
+        exactitud = accuracy_score(self.__valores_reales, self.__valores_predichos)
         return exactitud
     
-    def puntaje_de_precision(self, valores_reales, valores_predichos, etiquetas):
+    def puntaje_de_precision(self, etiquetas):
         '''
         Devuelve 
 
@@ -67,11 +68,11 @@ class Metricas(CargarDatos):
             DESCRIPTION.
 
         '''
-        precision = precision_score(valores_reales, valores_predichos, etiquetas, average = None)
+        precision = precision_score(self.__valores_reales, self.__valores_predichos, etiquetas, average = None)
         return precision
     
-    def reporte_de_clasificacion(self, valores_reales, valores_predichos, etiquetas):
-        reporte = classification_report(valores_reales, valores_predichos, etiquetas)
+    def reporte_de_clasificacion(self, etiquetas):
+        reporte = classification_report(self.__valores_reales, self.__valores_predichos, etiquetas)
         return reporte
         
         
