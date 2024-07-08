@@ -94,7 +94,7 @@ class Modelos(CargarDatos):
         k_vecinos_cercanos = KNeighborsClassifier(n_neighbors= k_vecinos) #Aquí se define el numeor de vecinos
         if validacion_cruzada:
             scaler = StandardScaler()
-            covariables_estandar = scaler.fit_transform(self.__covariales)
+            covariables_estandar = scaler.fit_transform(self.__covariables)
             predicciones = cross_val_predict(k_vecinos_cercanos, covariables_estandar , self.__variable_predecir, cv=5)
             resultados = {
                 'valor_real' : list(self.__variable_predecir),
