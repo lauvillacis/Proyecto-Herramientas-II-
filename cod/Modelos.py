@@ -27,7 +27,7 @@ from sklearn import metrics
 import warnings
 warnings.filterwarnings("ignore")
 
-from CargarDatos import CargarDatos
+from cod.CargarDatos import CargarDatos
 
 
 class Modelos(CargarDatos):

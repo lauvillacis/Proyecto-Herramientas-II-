@@ -5,7 +5,7 @@ Created on Sat Jul  6 09:16:29 2024
 
 @author: lauravillacis
 """
-from CargarDatos import CargarDatos
+from cod.CargarDatos import CargarDatos
 import pandas as pd
 import numpy as np
 from sklearn.metrics import confusion_matrix
