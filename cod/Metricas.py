@@ -11,7 +11,7 @@ import numpy as np
 from sklearn.metrics import confusion_matrix
 #Se importa de la librería sklearn la clase que realiza el modelo Naive Bayes
 from sklearn import metrics
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, make_scorer
 from sklearn.naive_bayes import GaussianNB
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.linear_model import LogisticRegression
@@ -83,7 +83,6 @@ class Metricas():
     def puntaje_recall(self, valores_reales, valores_predichos):
         puntaje_recall = recall_score(valores_reales, valores_predichos, average = None) 
         return puntaje_recall
-        
     
     
     def reporte_de_clasificacion(self, valores_reales, valores_predichos, etiquetas):
@@ -107,16 +106,14 @@ class Metricas():
             estimador = DecisionTreeClassifier()
         else:
             print("Modelo no identificado")
-        cortes = KFold(n_splits=5, shuffle=True, random_state=68)
-        # Generación de resultados usando kf como estrategia de cross-validation
-        cv_scores = cross_val_score(estimador, covariables, variable_predecir, cv=cortes)
-        cv_scores = [round(num, 3) for num in cv_scores]
+        cortes = StratifiedKFold(n_splits = 5, shuffle = True, random_state = 12)
+        f1_puntaje = make_scorer(f1_score, average='binary')
+        puntajes = cross_val_score(estimador, covariables, variable_predecir, cv = cortes, scoring = f1_puntaje) 
+        puntjaes = [round(num, 3) for num in cv_scores]
         print('Se obtienen los siguientes coeficientes de determinación:')
         print(cv_scores, '\n')
-        print(f'Max R-Squared: {max(cv_scores)}')
-        print(f'Min R-Squared: {min(cv_scores)}')
-        print('Promedio R-Squared: {:.3f}'.format(np.mean(cv_scores)))
-        print('Desviación Estándar: {:.3f}'.format(np.std(cv_scores)))
+        print('El promedio es: {:.3f}'.format(np.mean(cv_scores)))
+
         
         
         
