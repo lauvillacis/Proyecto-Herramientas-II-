@@ -24,6 +24,40 @@ class Metricas():
     def __init__(self, base):
         self.__base = base
         
+    @property
+    def base(self):
+        '''
+        Es el metodo get, para devolver el valor del atributo 'base'
+        
+        Parametros
+        -------
+        No lleva parametros explicitos pero se usa el objeto de la clase
+        
+        Returns
+        -------
+        No devuelve nada
+        '''
+        return self.__base
+    
+    
+    #Set
+    @base.setter
+    def base(self, nueva_base):
+        '''
+        Es el metodo set, para establecer el valor del atributo 'base'
+        
+        Parametros
+        -------
+        nueva_base : dataframe
+            Esto es el  dataframe que se quiere asignar para modificar 
+            el atributo 'base' del objeto de la clase
+        
+        Returns
+        -------
+        No devuelve nada
+        '''
+        self.__base = nueva_base
+        
     def matriz_de_confusion(self, valores_reales, valores_predichos):
         matriz_confusion = confusion_matrix(valores_reales, valores_predichos)
         return matriz_confusion
