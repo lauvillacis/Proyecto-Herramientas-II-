@@ -18,9 +18,9 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import classification_report
 from sklearn.metrics import accuracy_score
-from sklearn.preprocessing import StandardScaler
 from sklearn import metrics
-from sklearn.model_selection import cross_val_score, KFold
+from sklearn.model_selection import cross_val_score, StratifiedKFold
+from sklearn.preprocessing import StandardScaler
 import warnings
 warnings.filterwarnings("ignore")
 
@@ -109,10 +109,10 @@ class Metricas():
         cortes = StratifiedKFold(n_splits = 5, shuffle = True, random_state = 12)
         f1_puntaje = make_scorer(f1_score, average='binary')
         puntajes = cross_val_score(estimador, covariables, variable_predecir, cv = cortes, scoring = f1_puntaje) 
-        puntjaes = [round(num, 3) for num in cv_scores]
-        print('Se obtienen los siguientes coeficientes de determinación:')
-        print(cv_scores, '\n')
-        print('El promedio es: {:.3f}'.format(np.mean(cv_scores)))
+        puntajes = [round(num, 3) for num in puntajes]
+        print('Se obtienen los siguientes puntajes F1 para la clase 1:')
+        print(puntajes, '\n')
+        print('El promedio es: {:.3f}'.format(np.mean(puntajes)))
 
         
         
