@@ -5,19 +5,15 @@ Created on Sat Jul  6 09:16:29 2024
 
 @author: lauravillacis
 """
-from cod.CargarDatos import CargarDatos
-import pandas as pd
+
 import numpy as np
-from sklearn.metrics import confusion_matrix
-from sklearn import metrics
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, make_scorer
+from sklearn.metrics import confusion_matrix, make_scorer
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 from sklearn.naive_bayes import GaussianNB
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import classification_report
-from sklearn.metrics import accuracy_score
-from sklearn import metrics
 from sklearn.model_selection import cross_val_score, StratifiedKFold
 from sklearn.preprocessing import StandardScaler
 import warnings
