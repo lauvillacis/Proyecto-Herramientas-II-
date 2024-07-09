@@ -76,11 +76,11 @@ class Metricas():
         precision = precision_score(valores_reales, valores_predichos, average = None)
         return precision
     
-    def F_1(self, valores_reales, valores_predichos):
+    def puntaje_F1(self, valores_reales, valores_predichos):
         puntaje_f1 = f1_score(valores_reales, valores_predichos, average = None) 
         return puntaje_f1
     
-    def recall(self, valores_reales, valores_predichos):
+    def puntaje_recall(self, valores_reales, valores_predichos):
         puntaje_recall = recall_score(valores_reales, valores_predichos, average = None) 
         return puntaje_recall
         
