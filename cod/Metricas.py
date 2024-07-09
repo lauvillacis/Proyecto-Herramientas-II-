@@ -11,7 +11,7 @@ import numpy as np
 from sklearn.metrics import confusion_matrix
 #Se importa de la librería sklearn la clase que realiza el modelo Naive Bayes
 from sklearn import metrics
-from sklearn.metrics import precision_score
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 from sklearn.naive_bayes import GaussianNB
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.linear_model import LogisticRegression
@@ -52,7 +52,8 @@ class Metricas():
         '''
         exactitud = accuracy_score(valores_reales, valores_predichos)
         return exactitud
-    
+
+   
     def puntaje_de_precision(self, valores_reales, valores_predichos):
         '''
         Devuelve 
@@ -75,10 +76,20 @@ class Metricas():
         precision = precision_score(valores_reales, valores_predichos, average = None)
         return precision
     
+    def F_1(self, valores_reales, valores_predichos):
+        puntaje_f1 = f1_score(valores_reales, valores_predichos, average = None) 
+        return puntaje_f1
+    
+    def recall(self, valores_reales, valores_predichos):
+        puntaje_recall = recall_score(valores_reales, valores_predichos, average = None) 
+        return puntaje_recall
+        
+    
+    
     def reporte_de_clasificacion(self, valores_reales, valores_predichos, etiquetas):
         reporte = classification_report(valores_reales, valores_predichos, target_names = etiquetas)
         return reporte
-        
+
        
     def puntaje_validacion_cruzada(self, modelo, k_vecinos = 0):
         covariables = self.__base.iloc[:, :-1] 
