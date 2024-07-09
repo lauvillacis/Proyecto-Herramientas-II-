@@ -50,8 +50,11 @@ class Modelos(CargarDatos):
         
     def naive_bayes(self):
         naive_bayes = GaussianNB()
-        naive_bayes.fit(self.__covariables_train, self.__predecir_train)
-        predicciones = naive_bayes.predict(self.__covariables_test)
+        escala = StandardScaler()
+        covariables_train = escala.fit_transform(self.__covariables_train)
+        naive_bayes.fit(covariables_train, self.__predecir_train)
+        covariables_test = escala.fit_transform(self.__covariables_test)
+        predicciones = naive_bayes.predict(covariables_test)
         resultados = {
             'valor_real' : list(self.__predecir_test),
             'valor_predicho': list(predicciones)
@@ -60,7 +63,6 @@ class Modelos(CargarDatos):
         return resultados  
     
     def regresion_logistica(self):
-        regresion_log = LogisticRegression()
         regresion_log = LogisticRegression()
         regresion_log.fit(self.__covariables_train, self.__predecir_train)
         predicciones = regresion_log.predict(self.__covariables_test)    
@@ -73,8 +75,11 @@ class Modelos(CargarDatos):
     
     def k_vecinos_cercanos(self,k_vecinos, validacion_cruzada = False): #cambiar el nombre de la funcion y del modelo??
         k_vecinos_cercanos = KNeighborsClassifier(n_neighbors= k_vecinos) #Aquí se define el numeor de vecinos
-        k_vecinos_cercanos.fit(self.__covariables_train, self.__predecir_train)
-        predicciones = k_vecinos_cercanos.predict(self.__covariables_test)
+        escala = StandardScaler()
+        covariables_train = escala.fit_transform(self.__covariables_train)
+        k_vecinos_cercanos.fit(covariables_train, self.__predecir_train)
+        covariables_test = escala.fit_transform(self.__covariables_test)
+        predicciones = k_vecinos_cercanos.predict(covariables_test)
         resultados = {
             'valor_real' : list(self.__predecir_test),
             'valor_predicho': list(predicciones)
