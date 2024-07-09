@@ -94,20 +94,22 @@ class Metricas():
     def puntaje_validacion_cruzada(self, modelo, k_vecinos = 0):
         covariables = self.__base.iloc[:, :-1] 
         variable_predecir = self.__base.iloc[:, -1]
-        kf = KFold(n_splits=5, shuffle=True, random_state=68)
+        escala = StandardScaler()
         if modelo == 'naive bayes':
+            covariables = escala.fit_transform(covariables)
             estimador = GaussianNB()
         elif modelo == 'regresion logistica':
             estimador = LogisticRegression()
         elif modelo == 'k vecinos cercanos':
-            scaler = StandardScaler()
-            covariables = scaler.fit_transform(covariables)
+            covariables = escala.fit_transform(covariables)
             estimador = KNeighborsClassifier(n_neighbors= k_vecinos)
         elif modelo == 'arbol de decision':
-            estimador = GaussianNB()
-                
+            estimador = DecisionTreeClassifier()
+        else:
+            print("Modelo no identificado")
+        cortes = KFold(n_splits=5, shuffle=True, random_state=68)
         # Generación de resultados usando kf como estrategia de cross-validation
-        cv_scores = cross_val_score(estimador, covariables, variable_predecir, cv=kf)
+        cv_scores = cross_val_score(estimador, covariables, variable_predecir, cv=cortes)
         cv_scores = [round(num, 3) for num in cv_scores]
         print('Se obtienen los siguientes coeficientes de determinación:')
         print(cv_scores, '\n')
