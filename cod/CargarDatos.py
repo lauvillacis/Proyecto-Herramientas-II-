@@ -20,7 +20,7 @@ class CargarDatos():
         None.
         """
         
-        if(base==None):
+        if(base is None):
             self.__base = pd.DataFrame()
         else:
             self.__base=base

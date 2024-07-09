@@ -9,7 +9,6 @@ from cod.CargarDatos import CargarDatos
 import pandas as pd
 import numpy as np
 from sklearn.metrics import confusion_matrix
-#Se importa de la librería sklearn la clase que realiza el modelo Naive Bayes
 from sklearn import metrics
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, make_scorer
 from sklearn.naive_bayes import GaussianNB

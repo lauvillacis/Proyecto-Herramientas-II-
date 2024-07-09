@@ -53,7 +53,7 @@ class Modelos(CargarDatos):
         escala = StandardScaler()
         covariables_train = escala.fit_transform(self.__covariables_train)
         naive_bayes.fit(covariables_train, self.__predecir_train)
-        covariables_test = escala.fit_transform(self.__covariables_test)
+        covariables_test = escala.transform(self.__covariables_test)
         predicciones = naive_bayes.predict(covariables_test)
         resultados = {
             'valor_real' : list(self.__predecir_test),

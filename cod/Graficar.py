@@ -163,7 +163,7 @@ class Graficar(CargarDatos):
         valores_nulos_por_columna = self.base.isnull().sum()
         return(valores_nulos_por_columna)
         
-    def comparacion_densidades(self, cant_variables, predecir1, predecir0, color1='red', color0='green', fill=False):
+    def comparacion_densidades(self, cant_variables, variable_predecir, predecir1, predecir0, color1='red', color0='green', fill=False):
         """
         Método para realizar un gráfico de densidad para todas las covariables,
         asumiendo que la variable a predecir toma valores 0,1.
@@ -174,6 +174,8 @@ class Graficar(CargarDatos):
         ----------
         cant_variables : int
             cantidad de covariables de la base.
+        variable_predecir : string
+            variable a predecir
         predecir1 : string
             Clase 1 de la variable a predecir.
         predecir0 : string
@@ -209,10 +211,10 @@ class Graficar(CargarDatos):
             ax = axes[row, col]
             
             #Densidad filtrada por predecir1
-            sns.kdeplot(self.base[self.base['Class'] == 1][var], label=f'{var} - {predecir1}', fill=fill, color=color1, ax=ax)
+            sns.kdeplot(self.base[self.base[variable_predecir] == 1][var], label=f'{var} - {predecir1}', fill=fill, color=color1, ax=ax)
             
             #Densidad filtrada por predecir0
-            sns.kdeplot(self.base[self.base['Class'] == 0][var], label=f'{var} - {predecir0}', fill=fill, color=color0, ax=ax)
+            sns.kdeplot(self.base[self.base[variable_predecir] == 0][var], label=f'{var} - {predecir0}', fill=fill, color=color0, ax=ax)
     
             ax.set_xlabel('Valor')
             ax.set_ylabel('Densidad')
