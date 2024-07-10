@@ -50,7 +50,7 @@ class CargarDatos():
         Parametros
         -------
         nueva_base : dataframe
-            Esto es el  dataframe que se quiere asignar/ para modificar 
+            Esto es el  dataframe que se quiere asignar para modificar 
             el atributo 'base' del objeto de la clase
         
         Returns
@@ -59,15 +59,21 @@ class CargarDatos():
         '''
         self.__base = nueva_base
         
-    def view(self):
-        if self.__base is not None:
-            datos = self.__base.info()
-            print(datos)
-            return datos
-        else:
-            print("El objeto 'base' es None")
-            return None
-        
         
     def cargar_base(self, ruta):
+        '''
+        Carga la base al atributo base del objeto CargarDatos
+        
+        Parametros
+        -------
+        ruta : str
+            Se indica la ruta del archivo tipo excel para que se lea y se guarde
+        
+        Returns
+        -------
+        No devuelve nada
+        '''
         self.__base = pd.read_excel(ruta)
+        
+        
+        

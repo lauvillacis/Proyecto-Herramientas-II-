@@ -6,7 +6,6 @@ Created on Mon Jul  8 11:26:39 2024
 @author: marcoguardia
 """
 from matplotlib import pyplot as plt
-import pandas as pd
 import numpy as np
 import seaborn as sns
 from cod.CargarDatos import CargarDatos
@@ -14,6 +13,18 @@ from cod.CargarDatos import CargarDatos
 class Graficar(CargarDatos):
     
     def __init__ (self, base=None):
+        '''
+        Es el metodo constructor de los objetos de la clase
+        
+        Parametros
+        -------
+        base : data frame
+            Los datos que se quieren utilizar para graficar
+
+        Returns
+        -------
+        No devuelve nada
+        '''
         CargarDatos.__init__(self, base)
         
         
